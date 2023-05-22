@@ -20,6 +20,12 @@ import time
 
 URL = input("Enter the URL of the page to add time entries: ")
 CSV = input("Enter the filename of the CSV to get info from: ")
+file = open('email-and-password.txt', 'r')
+lines = file.readlines()
+EMAIL = lines[0][7:-1]
+EMAIL = EMAIL.strip()
+PASSWORD = lines[1][10:]
+PASSWORD = PASSWORD.strip()
 
 df = pd.read_csv(CSV)
 
@@ -31,9 +37,9 @@ driver.get(URL)
 
 # login
 email = driver.find_element(By.XPATH, '//*[@id="content"]/div/sbb-login-route/div/div[2]/div/fieldset/div[1]/input')
-email.send_keys("matthewsmallhouse@gmail.com")
+email.send_keys(EMAIL)
 password = driver.find_element(By.XPATH, '//*[@id="content"]/div/sbb-login-route/div/div[2]/div/fieldset/div[2]/input')
-password.send_keys("Cortina2@")
+password.send_keys(PASSWORD)
 enter = driver.find_element(By.XPATH, '//*[@id="content"]/div/sbb-login-route/div/div[2]/div/fieldset/div[4]/button')
 enter.click()
 

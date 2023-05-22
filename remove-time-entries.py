@@ -14,6 +14,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 import time
 
 URL = input("Enter URL of the bill to delete fees from: ")
+file = open('email-and-password.txt', 'r')
+lines = file.readlines()
+EMAIL = lines[0][6:-1]
+EMAIL = EMAIL.strip()
+PASSWORD = lines[1][9:]
+PASSWORD = PASSWORD.strip()
 
 driver = webdriver.Chrome(executable_path="C:\chromedriver.exe")
 #implicit wait
@@ -23,9 +29,9 @@ driver.get(URL)
 
 # login
 email = driver.find_element(By.XPATH, '//*[@id="content"]/div/sbb-login-route/div/div[2]/div/fieldset/div[1]/input')
-email.send_keys("matthewsmallhouse@gmail.com")
+email.send_keys(EMAIL)
 password = driver.find_element(By.XPATH, '//*[@id="content"]/div/sbb-login-route/div/div[2]/div/fieldset/div[2]/input')
-password.send_keys("Cortina2@")
+password.send_keys(PASSWORD)
 enter = driver.find_element(By.XPATH, '//*[@id="content"]/div/sbb-login-route/div/div[2]/div/fieldset/div[4]/button')
 enter.click()
 
