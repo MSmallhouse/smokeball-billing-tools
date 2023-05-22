@@ -37,10 +37,10 @@ button_list = driver.find_elements(By.CSS_SELECTOR, 'span.icon.icon-compile')
 for i in range(len(button_list)):
     button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'span.icon.icon-compile')))
     button.click()
-    time.sleep(0.2)
+    time.sleep(0.3)
     remove = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div/div/div/div/div/form/fieldset/div/div[1]/div[1]/div[7]/div/div/a')))
     remove.click()
-    time.sleep(0.2)
+    time.sleep(0.3)
 
 
 

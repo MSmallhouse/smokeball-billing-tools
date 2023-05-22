@@ -24,9 +24,10 @@ if '#' not in invoice_number:
 
 df = pd.read_csv(filename, skiprows=5)
 
-empty_bill_field = df[df['Billed'].isna()]
+#empty_bill_field = df[df['Billed'].isna()]
+#empty_bill_field = df.loc[(df['Billed'].isna())]
 df = df.loc[(df['Billed'] == invoice_number)]
-df = pd.concat([df, empty_bill_field], sort=True)
+#df = pd.concat([df, empty_bill_field], sort=True)
 df = df.drop(columns=['Staff', 'Matter', 'Activity', 'Rate', 'Amount', 'Billable?'])
 
 prev_date = ""
@@ -38,7 +39,7 @@ for index, row in df.iterrows():
         prev_date = row['Date']
         description = f'* {row["Subject"]}'
         hours = row['Hours']
-        subject = f"Services provided on {row['Date']}:"
+        subject = f"Services provided on {row['Date']}"
         continue
 
     if row['Date'] == prev_date: # still on same date
@@ -54,4 +55,4 @@ for index, row in df.iterrows():
 
 add_to_end(prev_date, subject, hours, description)
 
-result.to_csv('combined-bill.csv', index=False)
+result.to_csv(f'{filename[:-4]}-combined-bill.csv', index=False)
